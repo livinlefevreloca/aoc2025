@@ -16,7 +16,7 @@ int day1Problem1(char* fileName) {
 
   char str[32];
   memset(str, 0, sizeof(str));
-  for (int i = 0; i < items.count; i++){
+  for (size_t i = 0; i < items.count; i++){
     const StringView *strv = items.items[i];
     strncpy((char*)str, strv->str, strv->length);
     str[strv->length] = '\0';
@@ -42,7 +42,7 @@ int day1Problem2(char* fileName) {
 
   char str[32];
   memset(str, 0, sizeof(str));
-  for (int i = 0; i < items.count; i++){
+  for (size_t i = 0; i < items.count; i++){
     const StringView *strv = items.items[i];
     strncpy((char*)str, strv->str, strv->length);
     str[strv->length] = '\0';

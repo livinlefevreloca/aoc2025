@@ -85,10 +85,8 @@ Items splitBy(char *data, char delim) {
   view->str = &data[idx-curLen];
   view->length = curLen;
   views[viewsIdx] = view;
-  viewsIdx++;
 
-
-  assert(viewsIdx == itemsSize);
+  assert(viewsIdx <= itemsSize);
 
   Items items;
   items.items = (const StringView**)views;

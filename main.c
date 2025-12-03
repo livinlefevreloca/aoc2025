@@ -1,6 +1,6 @@
 #include "include/day1.h"
 #include "include/day2.h"
-#include "include/parse.h"
+#include "include/day3.h"
 #include <stdio.h>
 
 
@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
         break;
       case 2:
         day2(inputFile);
+        break;
+      case 3:
+        day3(inputFile);
         break;
       default:
           printf("Day %d is not implemented yet.\n", day);

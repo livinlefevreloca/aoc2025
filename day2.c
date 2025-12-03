@@ -12,7 +12,7 @@ int day2Problem1(char *fileName) {
   int64_t sum = 0;
   char buffer[128];
   memset((char *)&buffer, 0, sizeof(buffer));
-  for (int i = 0; i < items.count; i++) {
+  for (size_t i = 0; i < items.count; i++) {
     strncpy((char *)&buffer, items.items[i]->str, items.items[i]->length);
     sum += sumRange((char *)buffer);
     memset((char *)&buffer, 0, sizeof(buffer));
@@ -28,7 +28,7 @@ int day2Problem2(char *fileName) {
   int64_t sum = 0;
   char buffer[128];
   memset((char *)&buffer, 0, sizeof(buffer));
-  for (int i = 0; i < items.count; i++) {
+  for (size_t i = 0; i < items.count; i++) {
     strncpy((char *)&buffer, items.items[i]->str, items.items[i]->length);
     sum += sumRange2((char *)buffer);
     memset((char *)&buffer, 0, sizeof(buffer));

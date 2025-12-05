@@ -78,8 +78,8 @@ int64_t findMaxCombination2(const StringView *view) {
   }
 
   int64_t num = 0;
-  for (size_t i = 11; i >= 0; i--){
-    num += (int64_t)pow(10, (double)i)*digits[12-i-1];
+  for (size_t i = 12; i > 0; i--){
+    num += (int64_t)pow(10, (double)i-1)*digits[12-i];
   }
   return num;
 }

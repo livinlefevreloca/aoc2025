@@ -1,4 +1,5 @@
 #include "../include/parse.h"
+#include <string.h>
 
 char* readFile(char *path) {
   int fh = open(path, O_RDONLY);
@@ -95,3 +96,10 @@ Items splitBy(char *data, char delim) {
 
   return items;
 }
+
+char* stringViewToString(const StringView* view) {
+  char* string = (char*)malloc(sizeof(char)*view->length + 1);
+  strncpy(string, view->str, view->length);
+  return string;
+}
+

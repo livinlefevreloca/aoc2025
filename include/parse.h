@@ -21,4 +21,5 @@ typedef struct {
 char* readFile(char*);
 size_t _countItems(char*, char);
 Items splitBy(char*, char);
+char* stringViewToString(const StringView*);
 

@@ -1,5 +1,5 @@
-#include "include/parse.h"
 #include "include/day2.h"
+#include <localib/parse.h>
 
 void day2(char *fileName) {
   day2Problem1(fileName);

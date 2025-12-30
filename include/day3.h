@@ -1,4 +1,4 @@
-#include "../../localib/include/parse.h"
+#include "util.h"
 
 void day3(char*);
 int day3Problem1(char*);

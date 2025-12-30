@@ -1,7 +1,7 @@
 #include "include/day1.h"
+#include "include/util.h"
 #include <stdio.h>
 #include <string.h>
-#include "../localib/include/parse.h"
 
 void day1(char* fileName) {
   day1Problem1(fileName);

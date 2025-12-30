@@ -1,5 +1,5 @@
 #include "include/day6.h"
-#include "../localib/include/parse.h"
+#include "include/util.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>

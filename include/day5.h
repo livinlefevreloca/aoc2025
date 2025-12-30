@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../localib/include/parse.h"
+#include "util.h"
 
 #define MIN(a, b) a < b ? a : b;
 #define MAX(a, b) a > b ? a : b;

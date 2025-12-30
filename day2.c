@@ -1,5 +1,6 @@
 #include "include/day2.h"
-#include "../localib/include/parse.h"
+#include "include/util.h"
+#include <math.h>
 
 void day2(char *fileName) {
   day2Problem1(fileName);

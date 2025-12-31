@@ -24,7 +24,6 @@ typedef struct operation {
 
 int isDigit(char c);
 int isWhiteSpace(char c);
-void panic(const char*);
 
 void day6(char* fileName) {
   day6Problem1(fileName);
@@ -199,9 +198,4 @@ int isDigit(char c) {
 
 int isWhiteSpace(char c) {
   return c == '\n' || c == ' ';
-}
-
-void panic(const char* message) {
-    fprintf(stderr, "panic: %s\n", message);
-    exit(1);
 }

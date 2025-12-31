@@ -26,10 +26,35 @@ typedef struct {
   char** data;
 } dynStringArray;
 
+typedef struct {
+  char* items;
+  size_t rows;
+  size_t cols;
+} Grid;
+
+typedef struct {
+  size_t x;
+  size_t y;
+  int exists;
+} GridLocation;
+
+typedef struct {
+  GridLocation* locs;
+  size_t length;
+  size_t cap;
+} GridLocationList;
+
+typedef struct stack {
+  void** items;
+  size_t length;
+  size_t cap;
+} Stack;
+
 
 void _stringArrayExtend(dynStringArray*);
 
 dynStringArray stringArrayInit(size_t);
+void _dynStringArrayExtend(dynStringArray*);
 
 char* readFile(char*);
 
@@ -39,4 +64,30 @@ Items splitBy(char*, char);
 
 char* stringViewToString(const StringView*);
 
-void _dynStringArrayExtend(dynStringArray*);
+
+Grid initGrid(char*, size_t, size_t, size_t);
+char getGridAt(const Grid*, const GridLocation*);
+void setGridAt(Grid*, const GridLocation*, char);
+GridLocation findFirstInGrid(const Grid*, char);
+GridLocationList findAllInGrid(const Grid*, char);
+GridLocation _locFromGridIndex(const Grid*, size_t);
+size_t indexFromGridLocation(const Grid*, GridLocation*);
+
+GridLocation initGridLocation(size_t, size_t, int);
+char* displayGridLocation(GridLocation*);
+
+GridLocationList initGridLocationList(size_t);
+char* displayGridLocationList(GridLocationList*);
+void appendToGridLocationList(GridLocationList*, GridLocation);
+void setGridLocationListAt(GridLocationList*, size_t, GridLocation);
+GridLocation popGridLocationFromList(GridLocationList*);
+GridLocation getGridLocationFromList(GridLocationList*, size_t);
+
+
+Stack initStack(size_t);
+void* popStack(Stack*);
+void pushStack(Stack*, void*);
+void* peekStack(Stack*);
+
+void panic(const char*);
+

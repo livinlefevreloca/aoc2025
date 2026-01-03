@@ -10,6 +10,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define GRID_LOCATION_DISPLAY_SIZE 128
+
+#define PRINT_PTR_LIST(arr, len,  typ) { \
+  printf("length: %zu {", len); \
+  for (size_t i = 0; i < len; i++) { \
+      printf("%d", *(typ)arr[i]); \
+      if (i < len-1) \
+        printf(", "); \
+  } \
+  printf("}\n"); \
+}
+
+
 typedef struct {
   const char *str;
   size_t length;
@@ -91,3 +104,5 @@ void* peekStack(Stack*);
 
 void panic(const char*);
 
+void quickSort(void**, size_t, size_t, size_t, int (*)(void*, void*));
+void swap(void**, void**);

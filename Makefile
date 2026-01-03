@@ -3,11 +3,8 @@
 # Compiler
 CC = cc
 
-# localib
-LIB_NAME := localib
 PREFIX          := /usr/local
 INSTALL_LIB_DIR := $(PREFIX)/lib
-INSTALL_INC_DIR := $(PREFIX)/include/$(LIB_NAME)
 
 # Compiler Flags for both modes (essential flags)
 CFLAGS_COMMON = -Iinclude -Wall -Wextra -pedantic
@@ -21,9 +18,7 @@ CFLAGS_OPTIMIZED = $(CFLAGS_COMMON) -O3
 # 2. Linker Flags (Library paths)
 LDFLAGS = -L$(INSTALL_LIB_DIR) -Wl,-rpath,$(INSTALL_LIB_DIR)
 
-# 3. Library Flags (Library names)
-# standard convention: libraries go in LDLIBS
-LDLIBS = -l$(LIB_NAME)
+LDLIBS = -lm
 
 # Executable name
 TARGET = aoc
@@ -35,7 +30,8 @@ DATA_DIR = data
 
 # Source Files
 # Automatically find all .c files in the current directory (for dayX.c and main.c)
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+# Exclude test files (test_*.c) from the normal build
+SRC_FILES = $(filter-out $(SRC_DIR)/test_%.c, $(wildcard $(SRC_DIR)/*.c))
 
 # Object Files - Change .c to .o and keep the directory structure
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,%.o,$(SRC_FILES))
@@ -61,6 +57,12 @@ debug: CFLAGS = $(CFLAGS_DEBUG)
 debug: $(TARGET)
 	@echo "🐛 Built $(TARGET) in debug mode."
 
+# --- Profiling Build ---
+.PHONY: perf
+perf: CFLAGS = $(CFLAGS_COMMON) -O2 -g -fno-omit-frame-pointer
+perf: $(TARGET)
+	@echo "📊 Built $(TARGET) in profiling mode."
+
 # --- Linkage Rule ---
 # Link all object files to create the final executable
 $(TARGET): $(patsubst %.c,%.o,$(filter %.c, $(SRC_FILES)))
@@ -78,3 +80,15 @@ $(TARGET): $(patsubst %.c,%.o,$(filter %.c, $(SRC_FILES)))
 clean:
 	@echo "🧹 Cleaning up..."
 	rm -f $(TARGET) *.o lib/*.o
+
+# --- Test ---
+
+.PHONY: test
+test: test_utils.c util.c
+	$(CC) $(CFLAGS_DEBUG) test_utils.c util.c -o test
+	./test
+
+.PHONY: test-perf
+test-perf: test_utils.c util.c
+	$(CC) $(CFLAGS_COMMON) -O3 test_utils.c util.c -o test
+	./test

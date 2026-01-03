@@ -3,8 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define GRID_LOCATION_DISPLAY_SIZE 128
-
 char* readFile(char *path) {
   int fh = open(path, O_RDONLY);
 
@@ -318,3 +316,51 @@ void panic(const char* message) {
   fprintf(stderr, "PANIC: %s\n", message);
   exit(1);
 }
+
+void swap(void** a, void** b) {
+  *a = (void*)((size_t)(*a) ^ (size_t)(*b));
+  *b = (void*)((size_t)(*a) ^ (size_t)(*b));
+  *a = (void*)((size_t)(*a) ^ (size_t)(*b));
+}
+
+void quickSort(
+  void** list,
+  size_t length,
+  size_t start,
+  size_t end,
+  int (*comparator)(void*, void*)) {
+
+  if (length == 1) {
+    return;
+  }
+
+  size_t pivotIndex = end - 1;
+  if (pivotIndex == 1) {
+    if (comparator(list[0], list[1]) > 0) {
+      swap(&list[0], &list[1]);
+    }
+  }
+
+  while (comparator(list[pivotIndex-1], list[pivotIndex]) > 0) {
+    swap(&list[pivotIndex-1],&list[pivotIndex]);
+    pivotIndex--;
+    if (pivotIndex == 0) {
+      break;
+    }
+  }
+
+  for (size_t i = start; i < pivotIndex; i++) {
+    while (comparator(list[i], list[pivotIndex]) > 0 && i < end) {
+      for (size_t j = i; j < pivotIndex; j++) {
+          swap(&list[j], &list[j+1]);
+      }
+      pivotIndex--;
+    }
+  }
+
+  if (pivotIndex-start > 0)
+    quickSort(list, pivotIndex-start, start, pivotIndex, comparator);
+  if (end-pivotIndex > 0)
+    quickSort(list, end-pivotIndex, pivotIndex, end, comparator);
+}
+

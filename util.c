@@ -314,7 +314,6 @@ void pushStack(Stack* stack, void* item) {
 
 void panic(const char* message) {
   fprintf(stderr, "PANIC: %s\n", message);
-  exit(1);
 }
 
 void swap(void** a, void** b) {
